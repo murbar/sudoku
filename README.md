@@ -1,7 +1,7 @@
-# CRA Boilerplate v3.1.0
+# A Sudoku game built with JavaScript & React
 
-August 2019 - is it [up to date](https://github.com/facebook/create-react-app/releases)?
+Please share your feedback - let me know how you like this app, or if you find any bugs. What features would you like to see?
 
-- No cruft
-- Styled components - global styles, theme, helpers
-- "Nunito" font face
+Deployed at https://sudoku.joelb.dev/
+
+Check out my other projects at http://joelb.dev
