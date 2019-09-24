@@ -4,12 +4,21 @@ import { isArrowKey } from 'lib/helpers';
 
 const Input = styled.input`
   --starting-value-color: #999;
+  --warn-color: hsl(14, 75%, 50%);
+  --warn-bg-color: hsla(14, 75%, 50%, 0.3);
+  --highlight-bg-color: lightyellow;
+
   display: flex;
   width: 100%;
   height: 100%;
   margin: 0;
-  background: ${p => (p.isHighlight ? 'lightyellow' : 'white')};
-  color: ${p => (p.isWarn ? 'crimson' : 'inherit')};
+  background: ${p =>
+    p.isWarn
+      ? 'var(--warn-bg-color)'
+      : p.isHighlight
+      ? 'var(--highlight-bg-color)'
+      : 'transparent'};
+  color: ${p => (p.isWarn ? 'var(--warn-color)' : 'inherit')};
   text-align: center;
   align-items: center;
   font-size: 3.5rem;
