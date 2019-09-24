@@ -1,7 +1,7 @@
 import { media } from './helpers';
 
 const colors = {
-  offWhite: '#efefef',
+  offWhite: '#fefaf0',
   offBlack: '#222',
   green: '#3cc473'
 };
@@ -15,7 +15,7 @@ const theme = {
   },
   inputBorderRadius: `0.5rem`,
   fontFamily: "'Source Sans Pro', sans-serif",
-  fontFamilyHand: "'Gamja Flower', sans-serif",
+  fontFamilyHand: "'Patrick Hand', sans-serif",
   media
 };
 
