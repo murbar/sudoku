@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { isArrowKey } from 'lib/helpers';
 
 const Input = styled.input`
-  --starting-value-color: #999;
+  --pen-color: hsl(213, 25%, 24%);
+  --starting-values-color: #444;
   --warn-color: hsl(14, 75%, 50%);
   --warn-bg-color: hsla(14, 75%, 50%, 0.3);
   --highlight-bg-color: lightyellow;
@@ -18,12 +19,13 @@ const Input = styled.input`
       : p.isHighlight
       ? 'var(--highlight-bg-color)'
       : 'transparent'};
-  color: ${p => (p.isWarn ? 'var(--warn-color)' : 'inherit')};
+  color: ${p => (p.isWarn ? 'var(--warn-color)' : 'var(--pen-color)')};
   text-align: center;
   align-items: center;
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   font-weight: 900;
   font-family: ${p => p.theme.fontFamilyHand};
+  line-height: 1;
   border-radius: 0;
   border: none;
   border-right: 1px solid var(--border-color);
@@ -34,9 +36,11 @@ const Input = styled.input`
   }
   &[disabled] {
     font-family: ${p => p.theme.fontFamily};
-    color: var(--starting-value-color);
+    font-weight: 500;
+    font-size: 3.5rem;
+    color: var(--starting-values-color);
     /* iOS/Safari */
-    -webkit-text-fill-color: var(--starting-value-color);
+    -webkit-text-fill-color: var(--starting-values-color);
     opacity: 1;
   }
   &:nth-child(3n) {
