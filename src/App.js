@@ -5,7 +5,11 @@ import GameGrid from 'components/GameGrid';
 import useSudoku from 'hooks/useSudoku';
 import Header from 'components/Header';
 
-const Styles = styled.div``;
+const Styles = styled.div`
+  max-width: 66rem;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+`;
 
 export default function SudokuPage() {
   useDocumentTitle('Sudoku');
