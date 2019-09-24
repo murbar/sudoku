@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { isArrowKey } from 'lib/helpers';
 
 const Input = styled.input`
+  --starting-value-color: #999;
   display: flex;
   width: 100%;
   height: 100%;
@@ -12,7 +13,8 @@ const Input = styled.input`
   text-align: center;
   align-items: center;
   font-size: 3.5rem;
-  font-weight: 500;
+  font-weight: 900;
+  font-family: ${p => p.theme.fontFamilyHand};
   border-radius: 0;
   border: none;
   border-right: 1px solid var(--border-color);
@@ -22,7 +24,11 @@ const Input = styled.input`
     background: papayawhip;
   }
   &[disabled] {
-    color: dodgerblue;
+    font-family: ${p => p.theme.fontFamily};
+    color: var(--starting-value-color);
+    /* iOS/Safari */
+    -webkit-text-fill-color: var(--starting-value-color);
+    opacity: 1;
   }
   &:nth-child(3n) {
     border-right: 3px solid var(--border-color);
