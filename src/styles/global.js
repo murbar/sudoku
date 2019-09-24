@@ -25,4 +25,8 @@ export default createGlobalStyle`
       color: ${p => p.theme.colors.primary};
     }
   }
+
+  h1, h2, h3, h4, h5, h6 { 
+    font-weight: 900;
+  }
 `;
