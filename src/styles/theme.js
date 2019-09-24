@@ -14,7 +14,8 @@ const theme = {
     primary: colors.green
   },
   inputBorderRadius: `0.5rem`,
-  fontFamily: "'Nunito', sans-serif",
+  fontFamily: "'Source Sans Pro', sans-serif",
+  fontFamilyHand: "'Gamja Flower', sans-serif",
   media
 };
 
