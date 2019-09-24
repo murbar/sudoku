@@ -1,6 +1,6 @@
 {
-  "short_name": "CRA Boilerplate",
-  "name": "Create React App Boilerplate",
+  "short_name": "Sudoku",
+  "name": "Sudoku",
   "icons": [
     {
       "src": "favicon.ico",
