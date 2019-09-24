@@ -13,6 +13,7 @@ const Styles = styled.div`
   grid-template-columns: [start] repeat(9, calc(var(--board-size) / 9)) [end];
   grid-template-rows: [top] repeat(9, calc(var(--board-size) / 9)) [bottom];
   width: var(--board-size);
+  background: white;
   border: var(--border-width) solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
@@ -72,11 +73,11 @@ export default function GameGrid({
     }
   };
 
-  // const isWarn = index === 15;
   return (
     <Styles isPaused={isPaused} ref={gridRef}>
       {cells.map((value, index) => {
         const isHighlight = highlightFocus && calcIsHighlighted(index, focus);
+        const isWarn = false; // stub
         return (
           <Cell
             key={index}
@@ -87,7 +88,7 @@ export default function GameGrid({
             value={value}
             isStartingValue={startingValueIndexes.includes(index)}
             isHighlight={isHighlight}
-            // isWarn={isWarn}
+            isWarn={isWarn}
           />
         );
       })}
