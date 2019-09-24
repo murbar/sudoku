@@ -20,6 +20,7 @@ export default function SudokuPage() {
     isSolved,
     isPaused,
     isFilledButUnsolved,
+    difficulty,
     actions
   } = useSudoku();
 
@@ -28,7 +29,9 @@ export default function SudokuPage() {
       <Header />
       {isSolved && <h2>Solved! Good work.</h2>}
       {isFilledButUnsolved && <h2>Hmm. That's not quite right, check your work.</h2>}
-      <p>Hints remaining: {hintsRemaining}</p>
+      <p>
+        Difficulty: {difficulty}, Hints remaining: {hintsRemaining}
+      </p>
       <GameGrid
         cells={cells}
         isPaused={isPaused}
