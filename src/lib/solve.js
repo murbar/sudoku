@@ -1,4 +1,4 @@
-import { GRID_SIZE, shuffled, checkIsEmpty } from './helpers';
+import { GRID_SIZE, shuffled } from './helpers';
 import { checkIsValid, checkValidInAll } from './validate';
 
 const MAX_ITERATIONS = 1 << 16;
@@ -6,8 +6,6 @@ const GAME_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export const solvePuzzle = gridArray => {
   const copy = [...gridArray];
-  // const freshGrid = checkIsEmpty(copy);
-  const freshGrid = true;
   let iterations = 0;
 
   if (!checkIsValid(copy)) {
@@ -25,8 +23,7 @@ export const solvePuzzle = gridArray => {
       return _solveRecursively(gridArray, index + 1);
     }
 
-    const choices = freshGrid ? shuffled(GAME_NUMBERS) : GAME_NUMBERS;
-    for (const guess of choices) {
+    for (const guess of shuffled(GAME_NUMBERS)) {
       if (checkValidInAll(guess, index, gridArray)) {
         gridArray[index] = guess;
         if (_solveRecursively(gridArray, index + 1)) {

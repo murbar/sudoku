@@ -72,7 +72,7 @@ export const checkValidInAll = (value, index, gridArray) => {
   );
 };
 
-const getInvalidRows = gridArray =>
+export const getInvalidRows = gridArray =>
   getAllRows(gridArray)
     .map(isValidSudokuGroup)
     .reduce((indexes, rowIsValid, i) => {
