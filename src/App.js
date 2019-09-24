@@ -11,41 +11,46 @@ const Styles = styled.div`
   padding: 0 2rem 4rem;
 `;
 
-export default function SudokuPage() {
-  useDocumentTitle('Sudoku');
-  const {
-    cells,
-    startingValueIndexes,
-    hintsRemaining,
-    isSolved,
-    isPaused,
-    isFilledButUnsolved,
-    difficulty,
-    actions
-  } = useSudoku();
+export default function App() {
+  // const {
+  //   cells,
+  //   startingValueIndexes,
+  //   hintsRemaining,
+  //   isSolved,
+  //   isPaused,
+  //   isFilledButUnsolved,
+  //   difficulty,
+  //   actions
+  // } = useSudoku();
+  const [gameState, gameActions] = useSudoku();
+  useDocumentTitle('Play Sudoku Online');
 
   return (
     <Styles>
       <Header />
-      {isSolved && <h2>Solved! Good work.</h2>}
-      {isFilledButUnsolved && <h2>Hmm. That's not quite right, check your work.</h2>}
+      {gameState.isSolved && <h2>Solved! Good work.</h2>}
+      {gameState.isFilledButUnsolved && (
+        <h2>Hmm. That's not quite right, check your work.</h2>
+      )}
       <p>
-        Difficulty: {difficulty}, Hints remaining: {hintsRemaining}
+        Difficulty: {gameState.difficulty}, Hints remaining: {gameState.hintsRemaining}
       </p>
       <GameGrid
-        cells={cells}
-        isPaused={isPaused}
-        handleCellChange={actions.setCell}
-        startingValueIndexes={startingValueIndexes}
+        cells={gameState.currentCells}
+        isPaused={gameState.isPaused}
+        handleCellChange={gameActions.setCell}
+        startingValueIndexes={gameState.startingValueIndexes}
       />
-      <button onClick={actions.getHint} disabled={hintsRemaining < 1}>
+      <button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
         Get Hint
       </button>
-      <button onClick={actions.solveGame}>Solve</button>
-      <button onClick={actions.initNewGame}>New</button>
-      <button onClick={actions.resetGame}>Reset</button>
-      <button onClick={actions.togglePaused}>{isPaused ? 'Resume' : 'Pause'}</button>
-      <button onClick={actions.clearCells}>Clear</button>
+      <button onClick={gameActions.solveGame}>Solve</button>
+      <button onClick={gameActions.initNewGame}>New</button>
+      <button onClick={gameActions.resetGame}>Reset</button>
+      <button onClick={gameActions.togglePaused}>
+        {gameState.isPaused ? 'Resume' : 'Pause'}
+      </button>
+      <button onClick={gameActions.clearCells}>Clear</button>
       {/* <h2>Time: 00:00</h2> */}
       {/* <h2>Mode: play/solve</h2> */}
     </Styles>

@@ -1,20 +1,26 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import {
   initEmptyGridCells,
   getIndexes,
   getRandomElement,
-  countCellsFilled,
-  serializeValuesArray
+  countCellsFilled
 } from 'lib/helpers';
 import { generateGameCells } from 'lib/generate';
 import { checkValidInAll, checkIsSolved } from 'lib/validate';
 import { solvePuzzle } from 'lib/solve';
+import useLocalStorageState from 'hooks/useLocalStorageState';
+import config from 'config';
 
-function useLogging(data) {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-}
+const initGameState = options => ({
+  startingCells: [],
+  finalCells: [],
+  currentCells: initEmptyGridCells(),
+  difficulty: options.difficulty,
+  hintsRemaining: options.hints,
+  isPaused: false,
+  invalidCellIndexes: [],
+  gameInProgress: false
+});
 
 export default function useSudoku(options) {
   options = {
@@ -23,111 +29,137 @@ export default function useSudoku(options) {
     difficulty: 1,
     ...options
   };
-  const initialCells = useRef([]);
-  const solvedCells = useRef([]);
-  const invalidCellIndexes = useRef([]);
-  const [isPaused, setIsPaused] = useState(false);
-  const [difficulty, setDifficulty] = useState(options.difficulty);
-  const [hintsRemaining, setHintsRemaining] = useState(options.hints);
-  const [cells, setCells] = useState(initEmptyGridCells());
-  const startingValueIndexes = getIndexes(initialCells.current, v => v !== 0);
-  const isSolved = useMemo(() => checkIsSolved(cells), [cells]);
+  const [gameState, setGameState] = useLocalStorageState(
+    config.localStorageKeys.gameState,
+    initGameState(options)
+  );
+  const startingValueIndexes = getIndexes(gameState.startingCells, v => v !== 0);
+  const isSolved = useMemo(() => checkIsSolved(gameState.currentCells), [gameState]);
   const isFilledButUnsolved = useMemo(
-    () => !isSolved && countCellsFilled(cells) === cells.length,
-    [cells, isSolved]
+    () =>
+      !isSolved &&
+      countCellsFilled(gameState.currentCells) === gameState.currentCells.length,
+    [gameState, isSolved]
   );
 
-  // useLogging(cells);
-  // useLogging(startingValueIndexes);
-  // useLogging(invalidCellIndexes);
-
-  const checkValidCell = (index, value) => checkValidInAll(value, index, cells);
+  const checkValidCell = (index, value) =>
+    checkValidInAll(value, index, gameState.currentCells);
 
   const setCell = (index, value) => {
-    if (!checkValidCell(index, value)) {
-      // also check if value matches solved puzzle value?
-      // if so, puzzle must have only one solution
-      invalidCellIndexes.current.push(index);
-      // console.log(invalidCellIndexes.current);
-    } else {
-      invalidCellIndexes.current = invalidCellIndexes.current.filter(i => i !== index);
-    }
-    setCells(prev => {
-      prev[index] = value;
-      return [...prev];
+    setGameState(prev => {
+      let invalidCells = [...prev.invalidCellIndexes];
+      if (!checkValidCell(index, value)) {
+        // also check if value matches solved puzzle value?
+        // if so, puzzle must have only one solution
+        invalidCells.push(index);
+        // console.log(invalidCellIndexes.current);
+      } else {
+        invalidCells = invalidCells.filter(i => i !== index);
+      }
+      prev.currentCells[index] = value;
+      return {
+        ...prev,
+        currentCells: prev.currentCells,
+        invalidCellIndexes: invalidCells
+      };
     });
   };
 
   const getHint = () => {
-    if (hintsRemaining > 0) {
-      const emptyCells = getIndexes(cells, v => v === 0);
+    if (gameState.hintsRemaining > 0) {
+      const emptyCells = getIndexes(gameState.currentCells, v => v === 0);
       const i = getRandomElement(emptyCells);
-      setCell(i, solvedCells.current[i]);
-      setHintsRemaining(prev => (prev -= 1));
+      setCell(i, gameState.finalCells[i]);
+      setGameState(prev => {
+        return {
+          ...prev,
+          hintsRemaining: prev.hintsRemaining - 1
+        };
+      });
     }
   };
 
   const addHints = (qty = 3) => {
-    setHintsRemaining(prev => (prev += qty));
+    setGameState(prev => {
+      return {
+        ...prev,
+        hintsRemaining: prev.hintsRemaining + qty
+      };
+    });
   };
 
   const solveGame = () => {
     // try/catch
-    const solved = solvePuzzle(cells);
-    setCells(solved);
-    console.log(
-      serializeValuesArray(solved) === serializeValuesArray(solvedCells.current)
-    );
+    const solved = solvePuzzle(gameState.currentCells);
+    setGameState(prev => ({ ...prev, currentCells: solved }));
   };
 
-  const togglePaused = () => setIsPaused(prev => !prev);
+  const togglePaused = () => {
+    setGameState(prev => ({ ...prev, isPaused: !prev.isPaused }));
+  };
+
+  const setDifficulty = level => {
+    setGameState(prev => ({ ...prev, difficulty: level }));
+  };
 
   const clearCells = () => {
-    setCells(initEmptyGridCells());
-    initialCells.current = [];
-    solvedCells.current = [];
+    setGameState(prev => ({
+      ...prev,
+      currentCells: initEmptyGridCells(),
+      startingCells: [],
+      finalCells: [],
+      invalidCellIndexes: []
+    }));
   };
 
   const initNewGame = useCallback(() => {
-    const [initial, solved] = generateGameCells(difficulty);
-    initialCells.current = [...initial];
-    solvedCells.current = [...solved];
-    setCells([...initial]);
-    setHintsRemaining(options.hints);
-  }, [difficulty, options.hints]);
+    const [starting, final] = generateGameCells(gameState.difficulty);
+    setGameState(prev => ({
+      ...prev,
+      startingCells: [...starting],
+      finalCells: [...final],
+      currentCells: [...starting],
+      hintsRemaining: options.hints,
+      gameInProgress: true
+    }));
+  }, [gameState.difficulty, options.hints, setGameState]);
 
   const resetGame = () => {
-    if (initialCells.current.length > 0) {
-      setCells([...initialCells.current]);
+    if (gameState.startingCells.length > 0) {
+      setGameState(prev => ({
+        ...prev,
+        currentCells: [...prev.startingCells],
+        invalidCellIndexes: []
+      }));
     }
-    setHintsRemaining(options.hints);
+    setGameState(prev => ({ ...prev, hintsRemaining: options.hints }));
   };
 
   useEffect(() => {
-    if (!options.blank) initNewGame();
-  }, [initNewGame, options.blank]);
+    if (!options.blank && !gameState.gameInProgress) initNewGame();
+  }, [gameState.gameInProgress, initNewGame, options.blank]);
 
-  return {
-    cells,
+  const state = {
+    ...gameState,
     startingValueIndexes,
     isSolved,
-    isPaused,
-    isFilledButUnsolved,
-    hintsRemaining,
-    difficulty,
-    actions: {
-      setDifficulty,
-      setCell,
-      checkValidCell,
-      getHint,
-      addHints,
-      clearCells,
-      initNewGame,
-      resetGame,
-      solveGame,
-      togglePaused
-    }
+    isFilledButUnsolved
   };
+
+  const actions = {
+    setDifficulty,
+    setCell,
+    checkValidCell,
+    getHint,
+    addHints,
+    clearCells,
+    initNewGame,
+    resetGame,
+    solveGame,
+    togglePaused
+  };
+
+  return [state, actions];
 }
 
 // TODO proptypes
