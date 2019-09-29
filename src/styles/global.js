@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
   body {
     margin: 0;
-    background: ${p => p.theme.colors.offWhite};
-    color: ${p => p.theme.colors.offBlack};
+    background: ${p => p.theme.colors.cream};
+    color: ${p => p.theme.colors.darkBrown};
     font-family: ${p => p.theme.fontFamily};
     font-size: 1.8rem;
     line-height: 1.7;
@@ -28,5 +28,6 @@ export default createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 { 
     font-weight: 900;
+    line-height: 1.2;
   }
 `;

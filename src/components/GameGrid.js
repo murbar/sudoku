@@ -13,7 +13,7 @@ const Styles = styled.div`
   grid-template-columns: [start] repeat(9, calc(var(--board-size) / 9)) [end];
   grid-template-rows: [top] repeat(9, calc(var(--board-size) / 9)) [bottom];
   width: var(--board-size);
-  background: white;
+  /* background: rgba(255, 255, 255, 0.25); */
   border: var(--border-width) solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
@@ -38,9 +38,11 @@ const initFocus = {
 export default function GameGrid({
   cells,
   handleCellChange,
-  startingValueIndexes,
+  startingCellIndexes,
   isPaused,
-  highlightFocus = false
+  highlightFocus = true,
+  warnInvalid = true,
+  invalidCellIndexes
 }) {
   const gridRef = useRef();
   const [focus, setFocus] = useState(initFocus);
@@ -77,7 +79,7 @@ export default function GameGrid({
     <Styles isPaused={isPaused} ref={gridRef}>
       {cells.map((value, index) => {
         const isHighlight = highlightFocus && calcIsHighlighted(index, focus);
-        const isWarn = false; // stub
+        const isWarn = warnInvalid && invalidCellIndexes.includes(index); // stub
         return (
           <Cell
             key={index}
@@ -86,7 +88,7 @@ export default function GameGrid({
             handleFocusCell={handleFocusCell}
             index={index}
             value={value}
-            isStartingValue={startingValueIndexes.includes(index)}
+            isStartingValue={startingCellIndexes.includes(index)}
             isHighlight={isHighlight}
             isWarn={isWarn}
           />

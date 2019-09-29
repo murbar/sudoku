@@ -39,7 +39,8 @@ export default function App() {
         cells={gameState.currentCells}
         isPaused={gameState.isPaused}
         handleCellChange={gameActions.setCell}
-        startingValueIndexes={gameState.startingValueIndexes}
+        startingCellIndexes={gameState.startingCellIndexes}
+        invalidCellIndexes={gameState.invalidCellIndexes}
       />
       <button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
         Get Hint
@@ -53,6 +54,7 @@ export default function App() {
       <button onClick={gameActions.clearCells}>Clear</button>
       {/* <h2>Time: 00:00</h2> */}
       {/* <h2>Mode: play/solve</h2> */}
+      <h2>Solving a Sudoku puzzle with recursive backtracking</h2>
     </Styles>
   );
 }
