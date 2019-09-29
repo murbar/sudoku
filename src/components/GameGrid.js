@@ -61,6 +61,8 @@ export default function GameGrid({
     }
   };
 
+  const handleBlurGrid = () => setFocus(initFocus);
+
   const handleGridNavigate = (currentIndex, key) => {
     let invalidDest = true;
     let destIndex = calcDestinationIndex(currentIndex, key);
@@ -76,7 +78,7 @@ export default function GameGrid({
   };
 
   return (
-    <Styles isPaused={isPaused} ref={gridRef}>
+    <Styles isPaused={isPaused} ref={gridRef} onBlur={handleBlurGrid}>
       {cells.map((value, index) => {
         const isHighlight = highlightFocus && calcIsHighlighted(index, focus);
         const isWarn = warnInvalid && invalidCellIndexes.includes(index); // stub
