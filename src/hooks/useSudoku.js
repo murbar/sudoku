@@ -33,7 +33,7 @@ export default function useSudoku(options) {
     config.localStorageKeys.gameState,
     initGameState(options)
   );
-  const startingValueIndexes = getIndexes(gameState.startingCells, v => v !== 0);
+  const startingCellIndexes = getIndexes(gameState.startingCells, v => v !== 0);
   const isSolved = useMemo(() => checkIsSolved(gameState.currentCells), [gameState]);
   const isFilledButUnsolved = useMemo(
     () =>
@@ -141,7 +141,7 @@ export default function useSudoku(options) {
 
   const state = {
     ...gameState,
-    startingValueIndexes,
+    startingCellIndexes,
     isSolved,
     isFilledButUnsolved
   };
