@@ -73,7 +73,8 @@ export default function Cell({
   isWarn,
   handleCellChange,
   handleGridNavigate,
-  handleFocusCell
+  handleFocusCell,
+  handleBlur
 }) {
   const handleChange = e => {
     let { value: newValue } = e.target;
@@ -91,8 +92,14 @@ export default function Cell({
 
     if (key === 'Escape') {
       e.preventDefault();
-      e.target.blur();
+      handleBlur();
     }
+  };
+
+  const handleFocus = e => {
+    console.log(e.target.value);
+    if (e.target.value !== '') e.target.select();
+    handleFocusCell(index);
   };
 
   return (
@@ -100,7 +107,7 @@ export default function Cell({
       value={value === 0 ? '' : value}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
-      onFocus={() => handleFocusCell(index)}
+      onFocus={handleFocus}
       disabled={isStartingValue}
       isHighlight={isHighlight}
       isWarn={isWarn}

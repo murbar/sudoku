@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Cell from 'components/Cell';
 import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/helpers';
+import useHotKeyGridFocus from 'hooks/useHotKeyGridFocus';
 
 const Styles = styled.div`
   --board-size: 54rem;
@@ -49,6 +50,10 @@ export default function GameGrid({
 }) {
   const gridRef = useRef();
   const [focus, setFocus] = useState(initFocus);
+  const focusedCell = React.useMemo(() => {
+    const i = focus.index;
+    return i === null ? null : gridRef.current.querySelector(`[data-index='${i}']`);
+  }, [focus]);
 
   const handleFocusCell = index => {
     if (index === null) {
@@ -64,7 +69,10 @@ export default function GameGrid({
     }
   };
 
-  const handleBlurGrid = () => setFocus(initFocus);
+  const handleBlurGrid = () => {
+    if (focusedCell) focusedCell.blur();
+    setFocus(initFocus);
+  };
 
   const handleGridNavigate = (currentIndex, key) => {
     let invalidDest = true;
@@ -80,6 +88,10 @@ export default function GameGrid({
     }
   };
 
+  useHotKeyGridFocus(index => {
+    handleGridNavigate(index - 1, 'ArrowRight');
+  }, handleBlurGrid);
+
   return (
     <Styles isPaused={isPaused} ref={gridRef} onBlur={handleBlurGrid}>
       {cells.map((value, index) => {
@@ -91,6 +103,7 @@ export default function GameGrid({
             handleCellChange={handleCellChange}
             handleGridNavigate={handleGridNavigate}
             handleFocusCell={handleFocusCell}
+            handleBlur={handleBlurGrid}
             index={index}
             value={value}
             isStartingValue={startingCellIndexes.includes(index)}
