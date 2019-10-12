@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import useDocumentTitle from 'hooks/useDocumentTitle';
-import GameGrid from 'components/GameGrid';
-import useSudoku from 'hooks/useSudoku';
 import Header from 'components/Header';
+import GameGrid from 'components/GameGrid';
+import NumbersControl from 'components/NumbersControl';
+import ColumnLabels from 'components/ColumnLabels';
+import RowLabels from 'components/RowLabels';
+import useDocumentTitle from 'hooks/useDocumentTitle';
+import useSudoku from 'hooks/useSudoku';
 
 const Styles = styled.div`
   max-width: 66rem;
@@ -35,6 +38,9 @@ export default function App() {
       <p>
         Difficulty: {gameState.difficulty}, Hints remaining: {gameState.hintsRemaining}
       </p>
+      <NumbersControl />
+      <ColumnLabels />
+      <RowLabels />
       <GameGrid
         cells={gameState.currentCells}
         isPaused={gameState.isPaused}

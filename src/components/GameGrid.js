@@ -6,19 +6,22 @@ import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/helpers';
 
 const Styles = styled.div`
   --board-size: 54rem;
+  --cell-size: 5.5rem;
   --border-width: 0.3rem;
   --border-color: #444;
 
   display: grid;
-  grid-template-columns: [start] repeat(9, calc(var(--board-size) / 9)) [end];
-  grid-template-rows: [top] repeat(9, calc(var(--board-size) / 9)) [bottom];
-  width: var(--board-size);
+  /* grid-template-columns: [start] repeat(9, calc(var(--board-size) / 9)) [end]; */
+  grid-template-columns: [start] repeat(9, var(--cell-size)) [end];
+  grid-template-rows: [top] repeat(9, var(--cell-size)) [bottom];
+  /* width: var(--board-size); */
+  width: calc(var(--cell-size) * 9);
   /* background: rgba(255, 255, 255, 0.25); */
   border: var(--border-width) solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
-  box-sizing: content-box;
+  /* box-sizing: content-box; */
   filter: ${p => (p.isPaused ? 'blur(0.75rem)' : 'none')};
 `;
 
