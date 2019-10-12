@@ -10,7 +10,6 @@ const Input = styled.input`
   --highlight-bg-color: white;
 
   display: flex;
-  width: 100%;
   height: 100%;
   margin: 0;
   background: ${p =>
@@ -88,6 +87,11 @@ export default function Cell({
     if (isArrowKey(key) || key === 'Enter') {
       e.preventDefault();
       handleGridNavigate(index, key === 'Enter' ? 'ArrowRight' : key);
+    }
+
+    if (key === 'Escape') {
+      e.preventDefault();
+      e.target.blur();
     }
   };
 
