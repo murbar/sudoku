@@ -3,15 +3,11 @@ import styled from 'styled-components';
 import { isArrowKey } from 'lib/helpers';
 
 const Input = styled.input`
-  --pen-color: ${p => p.theme.colors.pine};
-  --starting-values-color: #444;
-  --warn-color: hsl(14, 75%, 50%);
-  --warn-bg-color: hsla(14, 75%, 50%, 0.3);
-  --highlight-bg-color: white;
-
   display: flex;
   height: 100%;
+  width: 100%;
   margin: 0;
+  padding: 0;
   background: ${p =>
     p.isWarn
       ? 'var(--warn-bg-color)'
@@ -21,27 +17,15 @@ const Input = styled.input`
   color: ${p => (p.isWarn ? 'var(--warn-color)' : 'var(--pen-color)')};
   text-align: center;
   align-items: center;
-  font-size: 4.5rem;
+  font-size: var(--grid-font-size);
   font-weight: 400;
   font-family: ${p => p.theme.fontFamilyHand};
-  line-height: 1;
+  line-height: 0.7;
   border-radius: 0;
   border: none;
+
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  &:focus {
-    outline: none;
-    background: ${p => (p.isWarn ? 'var(--warn-bg-color)' : p.theme.colors.seaFoam)};
-  }
-  &[disabled] {
-    font-family: ${p => p.theme.fontFamily};
-    font-weight: 700;
-    font-size: 3.5rem;
-    color: var(--starting-values-color);
-    /* iOS/Safari */
-    -webkit-text-fill-color: var(--starting-values-color);
-    opacity: 1;
-  }
   &:nth-child(3n) {
     border-right: 3px solid var(--border-color);
   }
@@ -55,6 +39,22 @@ const Input = styled.input`
   &:nth-child(n + 73):nth-child(-n + 81) {
     border-bottom: none;
   }
+
+  &:focus {
+    outline: none;
+    background: ${p => (p.isWarn ? 'var(--warn-bg-color)' : p.theme.colors.seaFoam)};
+  }
+
+  &[disabled] {
+    font-family: ${p => p.theme.fontFamily};
+    font-weight: 700;
+    /* font-size: 3.5rem; */
+    color: var(--starting-values-color);
+    /* iOS/Safari */
+    -webkit-text-fill-color: var(--starting-values-color);
+    opacity: 1;
+  }
+
   &[type='number']::-webkit-outer-spin-button,
   &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
