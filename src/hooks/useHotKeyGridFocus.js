@@ -6,15 +6,14 @@ const COL_KEYS = '123456789'.split('');
 
 const calcGridIndex = ({ row, col }) => row * ROW_KEYS.length + col;
 
-const initState = { row: null, col: null };
-
 const noOp = () => {};
+
+const initState = { row: null, col: null };
 
 export default function useHotKeyGridFocus(moveToIndex = noOp, blurFocus = noOp) {
   const [location, setLocation] = useState(initState);
 
   useEffect(() => {
-    console.log({ row: location.row, col: location.col });
     if (location.row !== null && location.col !== null) {
       moveToIndex(calcGridIndex(location));
       setLocation(initState);
