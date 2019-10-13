@@ -1,9 +1,7 @@
-import { GRID_SIZE, shuffled } from './helpers';
+import { GAME_NUMBERS, shuffled } from './helpers';
 import { checkIsValid, checkValidInAll } from './validate';
 
 const MAX_ITERATIONS = 1 << 16;
-const GAME_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export const solvePuzzle = gridArray => {
   const copy = [...gridArray];
   let iterations = 0;
@@ -17,7 +15,7 @@ export const solvePuzzle = gridArray => {
       throw new Error('No solution found');
     }
 
-    if (index >= GRID_SIZE ** 2) {
+    if (index >= gridArray.length) {
       return true;
     } else if (gridArray[index] !== 0) {
       return _solveRecursively(gridArray, index + 1);
@@ -40,6 +38,6 @@ export const solvePuzzle = gridArray => {
   if (!solved) {
     throw new Error('Puzzle not solvable in a reasonable amount of time');
   }
-
+  console.log(`solved with ${iterations} iterations`);
   return copy;
 };
