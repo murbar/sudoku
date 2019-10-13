@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import GridContainer from 'components/GridContainer';
 import useDocumentTitle from 'hooks/useDocumentTitle';
 import useSudoku from 'hooks/useSudoku';
+import Button from 'components/Button';
 
 const Styles = styled.div`
   max-width: 64rem;
@@ -14,16 +15,6 @@ const Styles = styled.div`
 `;
 
 export default function App() {
-  // const {
-  //   cells,
-  //   startingValueIndexes,
-  //   hintsRemaining,
-  //   isSolved,
-  //   isPaused,
-  //   isFilledButUnsolved,
-  //   difficulty,
-  //   actions
-  // } = useSudoku();
   const [gameState, gameActions] = useSudoku();
   useDocumentTitle('Play Sudoku Online');
 
@@ -45,16 +36,16 @@ export default function App() {
       </p>
       {/* <NumbersTouchControl /> */}
       <GridContainer {...{ gameState, gameActions }} />
-      <button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
+      <Button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
         Get Hint
-      </button>
-      <button onClick={gameActions.solveGame}>Solve</button>
-      <button onClick={gameActions.initNewGame}>New</button>
-      <button onClick={gameActions.resetGame}>Reset</button>
-      <button onClick={gameActions.togglePaused}>
+      </Button>
+      <Button onClick={gameActions.solveGame}>Solve</Button>
+      <Button onClick={gameActions.initNewGame}>New</Button>
+      <Button onClick={gameActions.resetGame}>Reset</Button>
+      <Button onClick={gameActions.togglePaused}>
         {gameState.isPaused ? 'Resume' : 'Pause'}
-      </button>
-      <button onClick={gameActions.clearCells}>Clear</button>
+      </Button>
+      <Button onClick={gameActions.clearCells}>Clear</Button>
       {/* <h2>Time: 00:00</h2> */}
       {/* <h2>Mode: play/solve</h2> */}
       <h2>
