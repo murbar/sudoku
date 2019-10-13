@@ -5,7 +5,13 @@ const Styles = styled.div`
   width: 100%;
   display: flex;
   flex: 1;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 2 / end;
+  font-size: calc(var(--grid-label-width) * 0.8);
+  line-height: 1;
+  padding: 0 var(--grid-border-width) 0;
+  color: var(--grid-label-color);
 `;
 
 const cols = '123456789';
