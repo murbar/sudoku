@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Cell from 'components/Cell';
 import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/helpers';
 import useHotKeyGridFocus from 'hooks/useHotKeyGridFocus';
-import useElementWidth from 'hooks/useElementWidth';
 
 const SquareAspectControl = styled.div`
   width: 100%;
@@ -20,28 +19,36 @@ const SquareAspectControl = styled.div`
 `;
 
 const Styles = styled.div`
-  /* Safari doesn't respect row height - even tho container has set height, we can't 
-    set row template to 9 x 1fr and expect each row to take up 1/9 of the height,
-    this works on both Chrome and Firefox but and I can't find any documentation about
-    how/why it would differ in Safari. So just for Safari, I get the width of the container
-    with a hook and manual set the height of the rows in pixels. This works but there
-    is a jank when the page first loads in safari -- not ideal.
-   */
-
-  /* --grid-cell-size: calc(${p => p.containerWidth}px / 9); */
-  --grid-cell-size: ${p =>
-    p.containerWidth ? `calc(${p.containerWidth}px / 9)` : '1fr'};
-
   grid-column: 2; /* position in parent grid */
 
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, var(--grid-cell-size));
+  grid-template-rows: repeat(9, 1fr);
   border: var(--grid-border-width) solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
   filter: ${p => (p.isPaused ? 'blur(0.75rem)' : 'none')};
+
+  /*
+  The following hack makes Safari respect the row height as 1/9th of this container's
+  height, which is set by SquareAspectControl up top. We have to prime the first row
+  with a hidden element that gets its height from its padding. This isn't necessary in
+  Chrome or Firefox. About 3 hours spent on this one. 🤬
+  */
+
+  &::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  & > *:first-child {
+    grid-row: 1;
+    grid-column: 1;
+  }
 `;
 
 const calcIsHighlighted = (index, focusObj) => {
@@ -67,7 +74,6 @@ export default function GameGrid({
   invalidCellIndexes
 }) {
   const gridRef = useRef();
-  const containerWidth = useElementWidth(gridRef);
   const [focus, setFocus] = useState(initFocus);
   const focusedCell = React.useMemo(() => {
     const i = focus.index;
@@ -113,12 +119,7 @@ export default function GameGrid({
 
   return (
     <SquareAspectControl>
-      <Styles
-        isPaused={isPaused}
-        ref={gridRef}
-        onBlur={handleBlurGrid}
-        containerWidth={containerWidth}
-      >
+      <Styles isPaused={isPaused} ref={gridRef} onBlur={handleBlurGrid}>
         {cells.map((value, index) => {
           const isHighlight = highlightFocus && calcIsHighlighted(index, focus);
           const isWarn = warnInvalid && invalidCellIndexes.includes(index); // stub
