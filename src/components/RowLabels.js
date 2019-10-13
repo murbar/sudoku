@@ -9,6 +9,7 @@ const Styles = styled.div`
   align-items: center;
   grid-column: 1;
   font-size: calc(var(--grid-label-width) * 0.8);
+  font-weight: bold;
   line-height: 1;
   padding: var(--grid-border-width) 0;
   color: var(--grid-label-color);
