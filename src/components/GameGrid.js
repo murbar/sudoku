@@ -35,6 +35,7 @@ const Styles = styled.div`
   height, which is set by SquareAspectControl up top. We have to prime the first row
   with a hidden element that gets its height from its padding. This isn't necessary in
   Chrome or Firefox. About 3 hours spent on this one. 🤬
+  https://medium.com/cloudaper/how-to-create-a-flexible-square-grid-with-css-grid-layout-ea48baf038f3
   */
 
   &::before {
