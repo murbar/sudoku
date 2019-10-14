@@ -7,7 +7,7 @@ import {
 } from 'lib/helpers';
 import { generateGameCells } from 'lib/generate';
 import { checkValidInAll, checkIsSolved } from 'lib/validate';
-import { solvePuzzle } from 'lib/solve';
+import { solvePuzzle } from 'lib/norvigSolve';
 import useLocalStorageState from 'hooks/useLocalStorageState';
 import config from 'config';
 
@@ -89,7 +89,7 @@ export default function useSudoku(options) {
   };
 
   const solveGame = () => {
-    // try/catch
+    // TODO handle return false / can't solve
     const solved = solvePuzzle(gameState.currentCells);
     setGameState(prev => ({ ...prev, currentCells: solved }));
   };

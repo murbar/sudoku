@@ -1,5 +1,19 @@
 import { deserializeGridValuesString } from './helpers';
 
+/*
+  This code was adapted from Norvig's algorithm for solving sudoku puzzles at
+  http://www.norvig.com/sudoku.html.
+
+  I attempted to make it more explicit and hopefully more easily understood for the sake
+  of those who have trouble wrapping their mind around complex recursion (me!). Expressive
+  function and variable names obviate the need for comments and allow the code to read
+  like English much of the time. The resulting verbosity may not be to everyone's taste,
+  but I really like it.
+
+  I think the data structures could be further simplified by storing possible values in
+  an array and using the indexes as cell labels instead of generating A1-I9 labels.
+*/
+
 const VALUES = '123456789';
 const ROWS = [...'ABCDEFGHI'];
 const COLS = [...VALUES];
@@ -19,6 +33,8 @@ const isKnownValue = possibleValues => possibleValues.length === 1;
 const failedRecursively = result => result === false;
 
 const removeValue = (valuesString, value) => valuesString.replace(value, '');
+
+const convertToValuesArray = valuesMap => CELLS.map(c => parseInt(valuesMap[c], 10));
 
 function resetOpCounts() {
   opCounts.assigns = 0;
@@ -200,19 +216,18 @@ function solveRecursivelyWithSearch(values) {
   return false;
 }
 
-const convertToValuesArray = valuesMap => {
-  return CELLS.map(c => parseInt(valuesMap[c], 10));
-};
-
-export const solvePuzzle = (gridString, trace = false) => {
+export function solvePuzzle(gridString, trace = false) {
+  const startTime = Date.now();
   const initialValues = calcPossibleValues(gridString);
   const resultMap = solveRecursivelyWithSearch(initialValues);
   const resultArray = convertToValuesArray(resultMap);
+  const elapsedTime = Date.now() - startTime;
   if (trace) {
+    const secs = (elapsedTime / 1000).toFixed(3);
     console.log(
-      `Complexity: ${opCounts.assigns} assignments, ${opCounts.eliminations} eliminations, ${opCounts.searches} searches`
+      `Took ${secs}s\n${opCounts.assigns} assignments\n${opCounts.eliminations} eliminations\n${opCounts.searches} searches`
     );
     console.log('Result', resultArray);
   }
   return resultArray;
-};
+}
