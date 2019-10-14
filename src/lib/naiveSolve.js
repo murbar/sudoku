@@ -1,9 +1,11 @@
 import { GAME_NUMBERS, shuffled } from './helpers';
 import { checkIsValid, checkValidInAll } from './validate';
 
-// this algorithm will exceed its max iterations with hard puzzles
-// we can improve up it by finding known values via constraint propagation
-// i.e. with Norvig's algorithm
+/*
+  This algorithm is sufficient for most puzzles but will exceed its max iterations
+  with hard puzzles. We can improve up it by finding known values via constraint
+  propagation before resorting to search, i.e. with Norvig's algorithm.
+*/
 
 const MAX_ITERATIONS = 1 << 16;
 
