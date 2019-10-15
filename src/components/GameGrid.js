@@ -28,7 +28,6 @@ const Styles = styled.div`
   border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
-  filter: ${p => (p.isPaused ? 'blur(0.75rem)' : 'none')};
 
   /*
   The following hack makes Safari respect the row height as 1/9th of this container's
@@ -69,7 +68,7 @@ export default function GameGrid({
   cells,
   handleCellChange,
   startingCellIndexes,
-  isPaused,
+
   highlightFocus = true,
   warnInvalid = true,
   invalidCellIndexes
@@ -120,7 +119,7 @@ export default function GameGrid({
 
   return (
     <SquareAspectControl>
-      <Styles isPaused={isPaused} ref={gridRef} onBlur={handleBlurGrid}>
+      <Styles ref={gridRef} onBlur={handleBlurGrid}>
         {cells.map((value, index) => {
           const isHighlight = highlightFocus && calcIsHighlighted(index, focus);
           const isWarn = warnInvalid && invalidCellIndexes.includes(index); // stub
