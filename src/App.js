@@ -5,7 +5,8 @@ import Header from 'components/Header';
 import GridContainer from 'components/GridContainer';
 import useDocumentTitle from 'hooks/useDocumentTitle';
 import useSudoku from 'hooks/useSudoku';
-import Button from 'components/Button';
+import GameControls from 'components/GameControls';
+// import runOnLoad from 'lib/runOnLoad';
 
 const Styles = styled.div`
   max-width: 64rem;
@@ -36,16 +37,7 @@ export default function App() {
       </p>
       {/* <NumbersTouchControl /> */}
       <GridContainer {...{ gameState, gameActions }} />
-      <Button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
-        Get Hint
-      </Button>
-      <Button onClick={gameActions.solveGame}>Solve</Button>
-      <Button onClick={gameActions.initNewGame}>New</Button>
-      <Button onClick={gameActions.resetGame}>Reset</Button>
-      <Button onClick={gameActions.togglePaused}>
-        {gameState.isPaused ? 'Resume' : 'Pause'}
-      </Button>
-      <Button onClick={gameActions.clearCells}>Clear</Button>
+      <GameControls {...{ gameState, gameActions }} />
       {/* <h2>Time: 00:00</h2> */}
       {/* <h2>Mode: play/solve</h2> */}
       <h2>

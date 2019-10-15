@@ -1,6 +1,12 @@
 export const GAME_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export const GRID_SIZE = 9;
 
+export const difficulties = {
+  EASY: 1,
+  NORMAL: 2,
+  HARD: 3
+};
+
 export const buildEmptyArray = length => Array(length).fill(null);
 
 export const shuffled = array => {
@@ -36,9 +42,14 @@ export const calcSubGrid = (index, gridWidth = GRID_SIZE / 3) => {
   return Math.floor(row / gridWidth) * gridWidth + Math.floor(col / gridWidth);
 };
 
-export const serializeValuesArray = array => array.reduce((str, v) => str + v, '');
+export const serializeGridValuesArray = array => array.join('');
 
-export const deserializeValuesString = string => [...string].map(v => parseInt(v, 10));
+export const deserializeGridValuesString = string => {
+  const GRID_VALUES = '0123456789.';
+  return [...string]
+    .filter(ch => GRID_VALUES.includes(ch))
+    .map(v => (v === '.' ? 0 : parseInt(v, 10)));
+};
 
 export const checkIsFilled = gridArray => {
   for (let value of gridArray) {
