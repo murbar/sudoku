@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import { difficulties } from 'lib/helpers';
+import useHotKeyMap from 'hooks/useHotKeyMap';
 
 const Styles = styled.div``;
 
@@ -26,6 +27,13 @@ const DifficultySelect = ({ current, setDifficulty }) => {
 };
 
 export default function GameControls({ gameState, gameActions }) {
+  useHotKeyMap({
+    p: gameActions.togglePaused,
+    n: gameActions.initNewGame,
+    s: gameActions.solveGame,
+    r: gameActions.resetGame
+  });
+
   return (
     <Styles>
       <Button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
