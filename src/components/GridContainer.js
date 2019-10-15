@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ColumnLabels from 'components/ColumnLabels';
 import RowLabels from 'components/RowLabels';
 import GameGrid from 'components/GameGrid';
+import GridOverlay from 'components/GridOverlay';
 import { media } from 'styles/helpers';
 
 const Styles = styled.div`
@@ -50,6 +51,7 @@ export default function GridContainer({ gameState, gameActions }) {
         startingCellIndexes={gameState.startingCellIndexes}
         invalidCellIndexes={gameState.invalidCellIndexes}
       />
+      <GridOverlay />
     </Styles>
   );
 }
