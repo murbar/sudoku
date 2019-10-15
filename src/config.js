@@ -1,7 +1,8 @@
 const version = '2019.9.24';
 
 const localStorageKeys = {
-  gameState: `sudoku-joelb-dev-${version}`
+  gameState: `sudoku-joelb-dev-${version}`,
+  appSettings: `sudoku-joelb-dev-settings-${version}`
 };
 
 export default {

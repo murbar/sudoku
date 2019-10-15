@@ -4,6 +4,7 @@ import Header from 'components/Header';
 // import NumbersTouchControl from 'components/NumbersTouchControl';
 import GridContainer from 'components/GridContainer';
 import useDocumentTitle from 'hooks/useDocumentTitle';
+import useAppSettings from 'hooks/useAppSettings';
 import useSudoku from 'hooks/useSudoku';
 import GameControls from 'components/GameControls';
 import Settings from 'components/Settings';
@@ -17,6 +18,7 @@ const Styles = styled.div`
 `;
 
 export default function App() {
+  const [settings, settingsActions] = useAppSettings();
   const [gameState, gameActions] = useSudoku();
   useDocumentTitle('Play Sudoku Online');
 
