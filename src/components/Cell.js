@@ -1,6 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { isArrowKey } from 'lib/helpers';
+
+const warnStyles = css`
+  background: var(--warn-bg-color);
+  color: var(--warn-color);
+`;
+
+const highlightStyles = css`
+  background: var(--highlight-bg-color);
+`;
 
 const Input = styled.input`
   display: flex;
@@ -8,13 +17,8 @@ const Input = styled.input`
   width: 100%;
   margin: 0;
   padding: 0;
-  background: ${p =>
-    p.isWarn
-      ? 'var(--warn-bg-color)'
-      : p.isHighlight
-      ? 'var(--highlight-bg-color)'
-      : 'transparent'};
-  color: ${p => (p.isWarn ? 'var(--warn-color)' : 'var(--pen-color)')};
+  background: transparent;
+  color: var(--pen-color);
   text-align: center;
   align-items: center;
   font-size: var(--grid-font-size);
@@ -23,6 +27,9 @@ const Input = styled.input`
   line-height: 0.7;
   border-radius: 0;
   border: none;
+
+  ${p => p.isWarn && warnStyles}
+  ${p => p.isHighlight && highlightStyles}
 
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
