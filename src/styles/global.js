@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
   body {
     margin: 0;
-    background: ${p => p.theme.colors.cream};
-    color: ${p => p.theme.colors.darkBrown};
+    background: ${p => p.theme.colors.background};
+    color: ${p => p.theme.colors.foreground};
     font-family: ${p => p.theme.fontFamily};
     font-size: 1.8rem;
     line-height: 1.7;
