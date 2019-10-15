@@ -1,5 +1,13 @@
 import { getRandomIndex, initEmptyGridCells, countCellsFilled } from './helpers';
-import { solvePuzzle } from './solve';
+import { solvePuzzle } from './norvigSolve';
+
+/* TODO
+http://www.norvig.com/sudoku.html
+"If we fill at least 17 squares with at least 8 different digits then we are done.
+(Note: with less than 17 squares filled in or less than 8 different digits it is known
+that there will be duplicate solutions. Thanks to Olivier Grégoire for the fine suggestion
+about 8 different digits.)"
+*/
 
 const difficultyLevels = {
   1: 37,
