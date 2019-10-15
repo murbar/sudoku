@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Cell from 'components/Cell';
-import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/helpers';
+import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/common';
 import useHotKeyGridFocus from 'hooks/useHotKeyGridFocus';
 
 const SquareAspectControl = styled.div`

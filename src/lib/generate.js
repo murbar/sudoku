@@ -1,4 +1,4 @@
-import { getRandomIndex, initEmptyGridCells, countCellsFilled } from './helpers';
+import { getRandomIndex, initEmptyGridCells, countCellsFilled } from './common';
 import { solvePuzzle } from './norvigSolve';
 
 /* TODO

@@ -4,7 +4,7 @@ import {
   getIndexes,
   getRandomElement,
   countCellsFilled
-} from 'lib/helpers';
+} from 'lib/common';
 import { generateGameCells } from 'lib/generate';
 import { checkValidInAll, checkIsSolved } from 'lib/validate';
 import { solvePuzzle } from 'lib/norvigSolve';

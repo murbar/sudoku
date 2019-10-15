@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
-import { difficulties } from 'lib/helpers';
+import { difficulties } from 'lib/common';
 import useHotKeyMap from 'hooks/useHotKeyMap';
 
 const Styles = styled.div``;

@@ -1,4 +1,4 @@
-import { GRID_SIZE, calcRowAndCol, checkIsFilled } from './helpers';
+import { GRID_SIZE, calcRowAndCol, checkIsFilled } from './common';
 
 const SUB_GRID_SIZE = GRID_SIZE / 3;
 

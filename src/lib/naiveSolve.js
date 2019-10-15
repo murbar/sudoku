@@ -1,4 +1,4 @@
-import { GAME_NUMBERS, shuffled } from './helpers';
+import { GAME_NUMBERS, shuffled } from './common';
 import { checkIsValid, checkValidInAll } from './validate';
 
 /*

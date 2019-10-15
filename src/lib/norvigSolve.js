@@ -1,4 +1,4 @@
-import { deserializeGridValuesString } from './helpers';
+import { deserializeGridValuesString } from './common';
 
 /*
   This code was adapted from Norvig's algorithm for solving sudoku puzzles at
