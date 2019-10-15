@@ -19,8 +19,8 @@ const ROWS = [...'ABCDEFGHI'];
 const COLS = [...VALUES];
 const CELLS = permuteItems(ROWS, COLS);
 const GROUP_LIST = buildGroupList();
-const GROUPS = buildGroups();
-const PEERS = buildPeers();
+const GROUPS = buildGroupsMapByCell();
+const PEERS = buildPeersMapByCell();
 
 const opCounts = {
   assigns: 0,
@@ -58,14 +58,14 @@ function buildGroupList() {
   return list;
 }
 
-function buildGroups() {
+function buildGroupsMapByCell() {
   return CELLS.reduce((groups, cell) => {
     groups[cell] = GROUP_LIST.filter(group => group.includes(cell));
     return groups;
   }, {});
 }
 
-function buildPeers() {
+function buildPeersMapByCell() {
   return CELLS.reduce((peers, cell) => {
     peers[cell] = [...new Set(GROUPS[cell].flat().filter(c => c !== cell))];
     return peers;
@@ -97,7 +97,6 @@ function calcPossibleValues(valuesString) {
 
   for (const [cell, value] of Object.entries(initialKnownValues)) {
     const v = value.toString();
-    // console.log(cell, v);
     if (VALUES.includes(v) && !assignValues(values, cell, v)) {
       return false;
     }
@@ -107,8 +106,6 @@ function calcPossibleValues(valuesString) {
 }
 
 function assignValues(possiblesMap, cell, value) {
-  // Eliminate all the other values (except d) from values[cell] and propagate
-  // Return values, except return false if a contradiction is detected
   opCounts.assigns++;
 
   const possibles = [...removeValue(possiblesMap[cell], value)];
