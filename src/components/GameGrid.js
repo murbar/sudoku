@@ -6,6 +6,8 @@ import { calcDestinationIndex, calcRowAndCol, calcSubGrid } from 'lib/helpers';
 import useHotKeyGridFocus from 'hooks/useHotKeyGridFocus';
 
 const SquareAspectControl = styled.div`
+  grid-area: main-grid; /* position in parent grid */
+
   width: 100%;
   padding-top: 100%;
   position: relative;
@@ -19,8 +21,6 @@ const SquareAspectControl = styled.div`
 `;
 
 const Styles = styled.div`
-  grid-column: 2; /* position in parent grid */
-
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);

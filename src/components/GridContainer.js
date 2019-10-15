@@ -33,6 +33,9 @@ const Styles = styled.div`
   display: grid;
   grid-template-columns: [start] var(--grid-label-width) 1fr [end];
   grid-template-rows: [top] var(--grid-label-width) 1fr [bottom];
+  grid-template-areas: 
+    ". col-labels"
+    "row-labels main-grid";
 `;
 
 export default function GridContainer({ gameState, gameActions }) {

@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Styles = styled.div`
+  grid-area: col-labels;
   width: 100%;
   display: flex;
   flex: 1;
   justify-content: space-around;
   align-items: center;
-  grid-column: 2 / end;
   font-size: calc(var(--grid-label-width) * 0.8);
   font-weight: bold;
   line-height: 1;
