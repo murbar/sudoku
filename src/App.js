@@ -1,16 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import GlobalStyles from 'styles/global';
+import { dark, light } from 'styles/theme';
+import { useSettings } from 'contexts/SettingsContext';
 import Header from 'components/Header';
 // import NumbersTouchControl from 'components/NumbersTouchControl';
 import GridContainer from 'components/GridContainer';
-import useDocumentTitle from 'hooks/useDocumentTitle';
-import useAppSettings from 'hooks/useAppSettings';
-import useSudoku from 'hooks/useSudoku';
 import GameControls from 'components/GameControls';
 import Settings from 'components/Settings';
+import useDocumentTitle from 'hooks/useDocumentTitle';
+import useSudoku from 'hooks/useSudoku';
+
 // import runOnLoad from 'lib/runOnLoad';
 
-const Styles = styled.div`
+const AppStyles = styled.div`
   max-width: 64rem;
   min-width: 35rem;
   margin: 0 auto;
@@ -18,12 +21,14 @@ const Styles = styled.div`
 `;
 
 export default function App() {
-  const [settings, settingsActions] = useAppSettings();
   const [gameState, gameActions] = useSudoku();
+  const { settings } = useSettings();
   useDocumentTitle('Play Sudoku Online');
 
   return (
-    <Styles>
+    <ThemeProvider theme={settings.darkTheme ? dark : light}>
+      <AppStyles>
+        <GlobalStyles />
       <Header />
       <p>
         Select a grid cell to enter a value 1 through 9. Navigate the grid with arrow keys
@@ -47,6 +52,7 @@ export default function App() {
       <h2>
         Solving a Sudoku puzzle with Norvig's constraint propagation and search algorithm
       </h2>
-    </Styles>
+      </AppStyles>
+    </ThemeProvider>
   );
 }
