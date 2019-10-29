@@ -26,4 +26,7 @@ const theme = {
   media
 };
 
+export const dark = theme;
+export const light = theme;
+
 export default theme;
