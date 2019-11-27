@@ -36,16 +36,16 @@ export default function GameControls({ gameState, gameActions }) {
 
   return (
     <Styles>
+      <Button onClick={gameActions.togglePaused}>
+        {gameState.isPaused ? 'Resume' : 'Pause'}
+      </Button>
       <Button onClick={gameActions.getHint} disabled={gameState.hintsRemaining < 1}>
         Get Hint
       </Button>
       <Button onClick={gameActions.solveGame}>Solve</Button>
-      <Button onClick={gameActions.initNewGame}>New</Button>
-      <Button onClick={gameActions.resetGame}>Reset</Button>
-      <Button onClick={gameActions.togglePaused}>
-        {gameState.isPaused ? 'Resume' : 'Pause'}
-      </Button>
       <Button onClick={gameActions.clearCells}>Clear</Button>
+      <Button onClick={gameActions.resetGame}>Reset</Button>
+      <Button onClick={gameActions.initNewGame}>New</Button>
       <DifficultySelect
         current={gameState.difficulty}
         setDifficulty={gameActions.setDifficulty}
