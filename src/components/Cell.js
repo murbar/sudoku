@@ -22,8 +22,10 @@ const Input = styled.input`
   text-align: center;
   align-items: center;
   font-size: var(--grid-font-size);
-  font-weight: 400;
-  font-family: ${p => p.theme.fontFamilyHand};
+  font-weight: 700;
+  /* font-weight: 400; */
+  /* font-family: ${p => p.theme.fontFamilyHand}; */
+  font-family: ${p => p.theme.fontFamily};
   line-height: 0.7;
   border-radius: 0;
   border: none;
@@ -54,7 +56,7 @@ const Input = styled.input`
 
   &[disabled] {
     font-family: ${p => p.theme.fontFamily};
-    font-weight: 700;
+    /* font-weight: 700; */
     /* font-size: 3.5rem; */
     color: var(--starting-values-color);
     /* iOS/Safari */
@@ -104,7 +106,6 @@ export default function Cell({
   };
 
   const handleFocus = e => {
-    console.log(e.target.value);
     if (e.target.value !== '') e.target.select();
     handleFocusCell(index);
   };
