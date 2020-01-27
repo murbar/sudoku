@@ -1,4 +1,10 @@
-import { getRandomIndex, initEmptyGridCells, countCellsFilled } from './common';
+import {
+  getRandomIndex,
+  getRandomElement,
+  GAME_NUMBERS,
+  initEmptyGridCells,
+  countCellsFilled
+} from './common';
 import { solvePuzzle } from './norvigSolve';
 
 /* TODO
@@ -20,8 +26,15 @@ const getMinHints = level => {
   return difficultyLevels[1];
 };
 
+const seedGrid = emptyGrid => {
+  // populate a random cell with a random value to ensure unique puzzle
+  emptyGrid[getRandomIndex()] = getRandomElement(GAME_NUMBERS);
+};
+
 export const generateGameCells = (difficulty = 1) => {
-  const gameGridSolved = solvePuzzle(initEmptyGridCells());
+  const emptyGrid = initEmptyGridCells();
+  seedGrid(emptyGrid);
+  const gameGridSolved = solvePuzzle(emptyGrid);
   const gameGrid = [...gameGridSolved];
   const minHints = getMinHints(difficulty);
 
