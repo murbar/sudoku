@@ -7,7 +7,6 @@ import useHotKeyGridFocus from 'hooks/useHotKeyGridFocus';
 
 const SquareAspectControl = styled.div`
   grid-area: main-grid; /* position in parent grid */
-
   width: 100%;
   padding-top: 100%;
   position: relative;
@@ -24,10 +23,9 @@ const Styles = styled.div`
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
-  border: var(--grid-border-width) solid var(--border-color);
-  border-radius: 0.5rem;
   overflow: hidden;
   position: relative;
+  padding: 2px;
 
   /*
   The following hack makes Safari respect the row height as 1/9th of this container's

@@ -11,6 +11,48 @@ const highlightStyles = css`
   background: var(--highlight-bg-color);
 `;
 
+// This was an interesting challenge but it's just not as consistent across browsers/devices
+// as using a grid lines image overlay.
+
+// const gridBorders = css`
+//   /* https://css-tricks.com/useful-nth-child-recipies/ */
+
+//   /* all cells */
+//   border: 1px solid var(--grid-border-color);
+
+//   /* left column */
+//   &:nth-child(9n + 1) {
+//   }
+
+//   /* 3rd 6th, and 9th column */
+//   &:nth-child(3n) {
+//     border-right: 2px solid var(--grid-border-color);
+//   }
+
+//   /* 1st, 4th and 7th column */
+//   &:nth-child(3n + 1) {
+//     border-left: 2px solid var(--grid-border-color);
+//   }
+
+//   /* right column */
+//   &:nth-child(9n) {
+//   }
+
+//   /* 1st, 4th and 7th rows */
+//   &:nth-child(n + 1):nth-child(-n + 9),
+//   &:nth-child(n + 28):nth-child(-n + 36),
+//   &:nth-child(n + 55):nth-child(-n + 63) {
+//     border-top: 2px solid var(--grid-border-color);
+//   }
+
+//   /* 3rd, 6th, and 9th rows */
+//   &:nth-child(n + 19):nth-child(-n + 27),
+//   &:nth-child(n + 46):nth-child(-n + 54),
+//   &:nth-child(n + 73):nth-child(-n + 81) {
+//     border-bottom: 2px solid var(--grid-border-color);
+//   }
+// `;
+
 const Input = styled.input`
   display: flex;
   height: 100%;
@@ -21,29 +63,14 @@ const Input = styled.input`
   color: ${p => (p.isPaused ? 'transparent' : 'var(--pen-color)')};
   text-align: center;
   font-size: var(--grid-font-size);
-  font-family: ${p => p.theme.fontFamilyHeadings};
-  line-height: 0.2;
+  font-family: ${p => p.theme.fontFamily};
+  font-weight: 700;
+  line-height: var(--grid-font-size);
+  border: calc(var(--grid-border-width) / 2) solid var(--grid-border-color);
   border-radius: 0;
-  border: none;
 
   ${p => p.isWarn && warnStyles}
   ${p => p.isHighlight && highlightStyles}
-
-  border-right: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  &:nth-child(3n) {
-    border-right: 3px solid var(--border-color);
-  }
-  &:nth-child(9n) {
-    border-right: none;
-  }
-  &:nth-child(n + 19):nth-child(-n + 27),
-  &:nth-child(n + 46):nth-child(-n + 54) {
-    border-bottom: 3px solid var(--border-color);
-  }
-  &:nth-child(n + 73):nth-child(-n + 81) {
-    border-bottom: none;
-  }
 
   &:focus {
     outline: none;
@@ -52,7 +79,6 @@ const Input = styled.input`
 
   &[disabled] {
     font-family: ${p => p.theme.fontFamily};
-    font-weight: 700;
     color: ${p => (p.isPaused ? 'transparent' : 'var(--starting-values-color)')};
 
     /* iOS/Safari */

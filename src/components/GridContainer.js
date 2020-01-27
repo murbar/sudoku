@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { ColumnLabels, RowLabels } from 'components/GridLabels';
 import GameGrid from 'components/GameGrid';
 import GridOverlay from 'components/GridOverlay';
+import GridLines from 'components/GridLines';
 import { mediaAbove, addHslAlpha } from 'styles/helpers';
 
 const Styles = styled.div`
   --grid-label-width: 2rem;
   --grid-label-color: ${p => addHslAlpha(p.theme.colors.foreground, 0.5)};
-  --grid-border-width: 0.3rem;
-  --border-color: ${p => p.theme.colors.foreground};
+  --grid-border-width: 2px;
+  --grid-border-color: ${p => p.theme.colors.foreground};
   --pen-color: ${p => p.theme.colors.pen};
   --starting-values-color: ${p => addHslAlpha(p.theme.colors.foreground, 1)};
   --warn-color: ${p => p.theme.colors.warn};
@@ -42,6 +43,7 @@ export default function GridContainer({ gameState, gameActions }) {
         invalidCellIndexes={gameState.invalidCellIndexes}
         isPaused={gameState.isPaused}
       />
+      <GridLines />
       <GridOverlay state={gameState} actions={gameActions} />
     </Styles>
   );
