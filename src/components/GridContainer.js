@@ -7,14 +7,15 @@ import { mediaAbove, addHslAlpha } from 'styles/helpers';
 
 const Styles = styled.div`
   --grid-label-width: 2rem;
-  --grid-label-color: #999;
+  --grid-label-color: ${p => addHslAlpha(p.theme.colors.foreground, 0.5)};
   --grid-border-width: 0.3rem;
-  --border-color: #444;
-  --starting-values-color: ${p => addHslAlpha(p.theme.colors.foreground, 0.5)};
-  --warn-color: hsl(14, 75%, 50%);
-  --warn-bg-color: hsla(14, 75%, 50%, 0.3);
-  --highlight-bg-color: white;
-  --grid-font-size: 1.8rem;
+  --border-color: ${p => p.theme.colors.foreground};
+  --pen-color: ${p => p.theme.colors.pen};
+  --starting-values-color: ${p => addHslAlpha(p.theme.colors.foreground, 1)};
+  --warn-color: ${p => p.theme.colors.warn};
+  --warn-bg-color: ${p => addHslAlpha(p.theme.colors.warn, 0.2)};
+  --highlight-bg-color: ${p => addHslAlpha(p.theme.colors.pen, 0.15)};
+  --grid-font-size: 2.5rem;
   margin: 0 0 0 -2rem;
 
   ${mediaAbove.phone`    
