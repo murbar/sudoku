@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ColumnLabels from 'components/ColumnLabels';
-import RowLabels from 'components/RowLabels';
+import { ColumnLabels, RowLabels } from 'components/GridLabels';
 import GameGrid from 'components/GameGrid';
 import GridOverlay from 'components/GridOverlay';
 import { mediaAbove } from 'styles/helpers';
