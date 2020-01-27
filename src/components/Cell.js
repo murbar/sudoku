@@ -11,6 +11,11 @@ const highlightStyles = css`
   background: var(--highlight-bg-color);
 `;
 
+const pausedStyles = css`
+  color: transparent;
+  background: transparent;
+`;
+
 // This was an interesting challenge but it's just not as consistent across browsers/devices
 // as using a grid lines image overlay.
 
@@ -86,6 +91,8 @@ const Input = styled.input`
       p.isPaused ? 'transparent' : 'var(--starting-values-color)'};
     opacity: 1;
   }
+
+  ${p => p.isPaused && pausedStyles}
 
   /* vendor styles */
   -webkit-appearance: none;
