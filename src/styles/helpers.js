@@ -36,3 +36,13 @@ export const mediaBelow = Object.keys(sizes).reduce((acc, label) => {
 export const addHslAlpha = (hsl, alpha) => {
   return `${hsl.slice(0, -1)}, ${alpha})`;
 };
+
+export const addHexAlpha = (hex, alpha) => {
+  hex = hex.slice(1);
+  const values =
+    hex.length === 3
+      ? [...hex].map(ch => ch + ch)
+      : [hex.substring(0, 2), hex.substring(2, 4), hex.substring(4)];
+  const rgb = values.map(h => parseInt(h, 16));
+  return `rgba(${rgb.join(', ')}, ${alpha})`;
+};
