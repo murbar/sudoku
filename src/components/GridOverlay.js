@@ -4,8 +4,8 @@ import { addAlpha } from 'styles/helpers';
 import Button from 'components/Button';
 
 const Styles = styled.div`
-  grid-row: top / bottom;
-  grid-column: start / end;
+  grid-row: 2 / bottom;
+  grid-column: 2 / end;
   position: relative;
   display: flex;
   align-items: center;
