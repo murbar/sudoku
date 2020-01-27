@@ -26,7 +26,7 @@ export const mediaAbove = Object.keys(sizes).reduce((acc, label) => {
 
 export const mediaBelow = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
-    @media (min-width: ${sizes[label] / 16}rem) {
+    @media (max-width: ${sizes[label] / 16}rem) {
       ${css(...args)}
     }
   `;
