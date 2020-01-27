@@ -15,6 +15,7 @@ const colors = {
 
 const theme = {
   inputBorderRadius: `0.5rem`,
+  fontFamilyHeadings: 'Bangers, sans-serif',
   fontFamily: "'Source Sans Pro', sans-serif",
   fontFamilyHand: "'Patrick Hand', sans-serif",
   mediaAbove
