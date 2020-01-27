@@ -1,4 +1,4 @@
-import { media } from './helpers';
+import { mediaAbove } from './helpers';
 
 const colors = {
   offWhite: '#fefaf0',
@@ -10,23 +10,34 @@ const colors = {
   pine: 'hsl(167, 30%, 29%)',
   seaFoam: 'hsl(137, 78%, 88%)',
   darkBrown: 'hsl(23, 10%, 26%)',
-  blue: 'steel blue'
+  blue: 'steelblue'
 };
 
 const theme = {
+  inputBorderRadius: `0.5rem`,
+  fontFamily: "'Source Sans Pro', sans-serif",
+  fontFamilyHand: "'Patrick Hand', sans-serif",
+  mediaAbove
+};
+
+export const light = {
+  ...theme,
   colors: {
     ...colors,
     background: colors.cream,
     foreground: colors.darkBrown,
     primary: colors.green
-  },
-  inputBorderRadius: `0.5rem`,
-  fontFamily: "'Source Sans Pro', sans-serif",
-  fontFamilyHand: "'Patrick Hand', sans-serif",
-  media
+  }
 };
 
-export const dark = theme;
-export const light = theme;
+export const dark = {
+  ...theme,
+  colors: {
+    ...colors,
+    background: colors.darkBrown,
+    foreground: colors.cream,
+    primary: colors.green
+  }
+};
 
 export default theme;

@@ -4,7 +4,7 @@ import ColumnLabels from 'components/ColumnLabels';
 import RowLabels from 'components/RowLabels';
 import GameGrid from 'components/GameGrid';
 import GridOverlay from 'components/GridOverlay';
-import { media } from 'styles/helpers';
+import { mediaAbove } from 'styles/helpers';
 
 const Styles = styled.div`
   --grid-label-width: 2rem;
@@ -19,16 +19,7 @@ const Styles = styled.div`
   --grid-font-size: 1.8rem;
   margin: 0 0 0 -2rem;
 
-  ${media.px400`    
-    --grid-font-size: 2.2rem;
-  `}
-  ${media.px450`    
-    --grid-font-size: 2.8rem;
-  `}
-  ${media.phone`    
-    --grid-font-size: 3.2rem;
-  `}
-  ${media.px600`    
+  ${mediaAbove.phone`    
     --grid-font-size: 3.5rem;
   `}
 
@@ -36,8 +27,8 @@ const Styles = styled.div`
   grid-template-columns: [start] var(--grid-label-width) 1fr [end];
   grid-template-rows: [top] var(--grid-label-width) 1fr [bottom];
   grid-template-areas: 
-    ". col-labels"
-    "row-labels main-grid";
+    '. col-labels'
+    'row-labels main-grid';
 `;
 
 export default function GridContainer({ gameState, gameActions }) {
