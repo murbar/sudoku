@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { addAlpha } from 'styles/helpers';
+import { addHslAlpha } from 'styles/helpers';
 import Button from 'components/Button';
 
 const Styles = styled.div`
@@ -11,7 +11,7 @@ const Styles = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: ${p => addAlpha(p.theme.colors.background, 0.9)};
+  background: ${p => addHslAlpha(p.theme.colors.background, 0.9)};
   z-index: 500;
   pointer-events: none;
   opacity: 0;

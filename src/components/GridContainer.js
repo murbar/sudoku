@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import { ColumnLabels, RowLabels } from 'components/GridLabels';
 import GameGrid from 'components/GameGrid';
 import GridOverlay from 'components/GridOverlay';
-import { mediaAbove } from 'styles/helpers';
+import { mediaAbove, addHslAlpha } from 'styles/helpers';
 
 const Styles = styled.div`
   --grid-label-width: 2rem;
   --grid-label-color: #999;
   --grid-border-width: 0.3rem;
   --border-color: #444;
-  --pen-color: ${p => p.theme.colors.pine};
-  --starting-values-color: #444;
+  --starting-values-color: ${p => addHslAlpha(p.theme.colors.foreground, 0.5)};
   --warn-color: hsl(14, 75%, 50%);
   --warn-bg-color: hsla(14, 75%, 50%, 0.3);
   --highlight-bg-color: white;
