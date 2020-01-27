@@ -120,6 +120,7 @@ export default function useSudoku(options) {
       finalCells: [...final],
       currentCells: [...starting],
       hintsRemaining: options.hints,
+      invalidCellIndexes: [],
       gameInProgress: true
     }));
   }, [gameState.difficulty, options.hints, setGameState]);
