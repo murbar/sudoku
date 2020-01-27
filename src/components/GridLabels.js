@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mediaAbove } from 'styles/helpers';
 
 const cols = '123456789';
 const rows = 'ABCDEFGHI';
@@ -13,6 +14,11 @@ const LabelStyles = styled.div`
   font-weight: bold;
   line-height: 1;
   color: var(--grid-label-color);
+  visibility: hidden;
+
+  ${mediaAbove.phone`    
+    visibility: visible;
+  `}
 `;
 
 const ColumnStyles = styled(LabelStyles)`
