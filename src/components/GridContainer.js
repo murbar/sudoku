@@ -47,10 +47,10 @@ export default function GridContainer({ gameState, gameActions }) {
       <RowLabels />
       <GameGrid
         cells={gameState.currentCells}
-        isPaused={gameState.isPaused}
         handleCellChange={gameActions.setCell}
         startingCellIndexes={gameState.startingCellIndexes}
         invalidCellIndexes={gameState.invalidCellIndexes}
+        isPaused={gameState.isPaused}
       />
       <GridOverlay />
     </Styles>

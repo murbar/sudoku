@@ -71,6 +71,7 @@ export default function GameGrid({
 
   highlightFocus = true,
   warnInvalid = true,
+  isPaused,
   invalidCellIndexes
 }) {
   const gridRef = useRef();
@@ -135,6 +136,7 @@ export default function GameGrid({
               isStartingValue={startingCellIndexes.includes(index)}
               isHighlight={isHighlight}
               isWarn={isWarn}
+              isPaused={isPaused}
             />
           );
         })}

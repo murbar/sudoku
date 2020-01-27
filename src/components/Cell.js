@@ -18,7 +18,7 @@ const Input = styled.input`
   margin: 0;
   padding: 0;
   background: transparent;
-  color: var(--pen-color);
+  color: ${p => (p.isPaused ? 'transparent' : 'var(--pen-color)')};
   text-align: center;
   align-items: center;
   font-size: var(--grid-font-size);
@@ -58,9 +58,11 @@ const Input = styled.input`
     font-family: ${p => p.theme.fontFamily};
     /* font-weight: 700; */
     /* font-size: 3.5rem; */
-    color: var(--starting-values-color);
+    color: ${p => (p.isPaused ? 'transparent' : 'var(--starting-values-color)')};
+
     /* iOS/Safari */
-    -webkit-text-fill-color: var(--starting-values-color);
+    -webkit-text-fill-color: ${p =>
+      p.isPaused ? 'transparent' : 'var(--starting-values-color)'};
     opacity: 1;
   }
 
@@ -80,6 +82,7 @@ export default function Cell({
   isStartingValue,
   isHighlight,
   isWarn,
+  isPaused,
   handleCellChange,
   handleGridNavigate,
   handleFocusCell,
@@ -119,6 +122,7 @@ export default function Cell({
       disabled={isStartingValue}
       isHighlight={isHighlight}
       isWarn={isWarn}
+      isPaused={isPaused}
       maxLength="1"
       min="1"
       max="9"
