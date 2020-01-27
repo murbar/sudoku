@@ -20,13 +20,9 @@ const Input = styled.input`
   background: transparent;
   color: ${p => (p.isPaused ? 'transparent' : 'var(--pen-color)')};
   text-align: center;
-  align-items: center;
   font-size: var(--grid-font-size);
-  font-weight: 700;
-  /* font-weight: 400; */
-  /* font-family: ${p => p.theme.fontFamilyHand}; */
-  font-family: ${p => p.theme.fontFamily};
-  line-height: 0.7;
+  font-family: ${p => p.theme.fontFamilyHeadings};
+  line-height: 0.2;
   border-radius: 0;
   border: none;
 
@@ -51,13 +47,12 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    background: ${p => (p.isWarn ? 'var(--warn-bg-color)' : p.theme.colors.seaFoam)};
+    background: ${p => (p.isWarn ? 'var(--warn-bg-color)' : p.theme.colors.offWhite)};
   }
 
   &[disabled] {
     font-family: ${p => p.theme.fontFamily};
-    /* font-weight: 700; */
-    /* font-size: 3.5rem; */
+    font-weight: 700;
     color: ${p => (p.isPaused ? 'transparent' : 'var(--starting-values-color)')};
 
     /* iOS/Safari */
@@ -66,6 +61,7 @@ const Input = styled.input`
     opacity: 1;
   }
 
+  /* vendor styles */
   &[type='number']::-webkit-outer-spin-button,
   &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;

@@ -68,7 +68,6 @@ export default function GameGrid({
   cells,
   handleCellChange,
   startingCellIndexes,
-
   highlightFocus = true,
   warnInvalid = true,
   isPaused,
