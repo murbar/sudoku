@@ -62,6 +62,7 @@ const Input = styled.input`
   }
 
   /* vendor styles */
+  -webkit-appearance: none;
   &[type='number']::-webkit-outer-spin-button,
   &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
