@@ -7,7 +7,7 @@ import GridOverlay from 'components/GridOverlay';
 import { media } from 'styles/helpers';
 
 const Styles = styled.div`
-  --grid-label-width: 1em;
+  --grid-label-width: 2rem;
   --grid-label-color: #999;
   --grid-border-width: 0.3rem;
   --border-color: #444;
@@ -17,6 +17,7 @@ const Styles = styled.div`
   --warn-bg-color: hsla(14, 75%, 50%, 0.3);
   --highlight-bg-color: white;
   --grid-font-size: 1.8rem;
+  margin: 0 0 0 -2rem;
 
   ${media.px400`    
     --grid-font-size: 2.2rem;

@@ -8,7 +8,7 @@ const Styles = styled.div`
   flex: 1;
   justify-content: space-around;
   align-items: center;
-  font-size: calc(var(--grid-label-width) * 0.8);
+  font-size: calc(var(--grid-label-width) * 0.75);
   font-weight: bold;
   line-height: 1;
   padding: 0 var(--grid-border-width) 0;
